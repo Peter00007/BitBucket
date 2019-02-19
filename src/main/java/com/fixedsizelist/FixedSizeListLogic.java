@@ -1,4 +1,4 @@
-package main.java.com.mylist;
+package main.java.com.fixedsizelist;
 
 import java.util.List;
 import java.util.Vector;
@@ -6,18 +6,18 @@ import java.util.Vector;
 /**
  * Created by User on 19.02.2019.
  */
-public class MyListLogic {
+public class FixedSizeListLogic {
     List<Integer> arraylist;
     int k = 0;
 
     //default constructor
-    MyListLogic() {
+    FixedSizeListLogic() {
         arraylist = new Vector<>(16);
         k = 16;
     }
 
     //constructor with user capacity
-    MyListLogic(int n) {
+    FixedSizeListLogic(int n) {
         arraylist = new Vector<>(n);
         k = n;
         arraylist.add(1);
