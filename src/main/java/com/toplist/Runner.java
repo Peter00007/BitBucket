@@ -15,7 +15,6 @@ public class Runner {
         System.out.println(topListLogic.searchMinElement());
         System.out.println(topListLogic.searchMaxElement());
         System.out.println(topListLogic.arithmeticAverage());
-        System.out.println(topListLogic.checkNull());
         System.out.println(topListLogic.searchByValue(2));
     }
 }
