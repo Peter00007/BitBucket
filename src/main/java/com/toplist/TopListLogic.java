@@ -10,6 +10,7 @@ public class TopListLogic {
     int count;
     int maxElement;
     int minElement;
+    boolean flag;
     double arithmeticMean;
 
     TopListLogic() {
@@ -17,104 +18,144 @@ public class TopListLogic {
         counterValue = 0;
         count = -1;
         arithmeticMean = 0;
-        arrayList.add(1);
+        flag = false;
+        /*arrayList.add(1);
         arrayList.add(2);
         arrayList.add(3);
         arrayList.add(-10);
         arrayList.add(110);
-        arrayList.add(4);
+        arrayList.add(4);*/
+        arrayList.add(1);
+        arrayList.add(5);
+    }
+
+    boolean checkNull() {
+        if (arrayList.equals(null)) {
+            return true;
+        } else
+            return false;
     }
 
     //added by value
     void addByValue(int value) {
-        for (int i = 0; i < arrayList.size(); i++) {
-            counterValue = arrayList.get(i) + value;
-            arrayList.set(i, counterValue);
+        if (checkNull()) {
+            arrayList.add(value);
+        } else {
+            for (int i = 0; i < arrayList.size(); i++) {
+                counterValue = arrayList.get(i) + value;
+                arrayList.set(i, counterValue);
+            }
+            arrayList.add(value);
         }
-        arrayList.add(value);
     }
 
     //added by position
     void addByPosition(int position, int value) {
-        for (int i = 0; i < arrayList.size(); i++) {
-            counterValue = arrayList.get(i) + value;
-            arrayList.set(i, counterValue);
+        if (position >= 0 && position <= arrayList.size()) {
+            if (checkNull() == false) {
+                for (int i = 0; i < arrayList.size(); i++) {
+                    counterValue = arrayList.get(i) + value;
+                    arrayList.set(i, counterValue);
+                }
+                arrayList.add(position, value);
+            }
+            if (position == 0 && checkNull() == true) {
+                arrayList.add(position, value);
+            }
         }
-        arrayList.add(position, value);
     }
 
     //remove by position
     void removeElementByPosition(int position) {
-        for (int i = 0; i < arrayList.size(); i++) {
-            if (i == position) {
-                continue;
+        if ((checkNull() == false) && (position >= 0) && (position < arrayList.size())) {
+            for (int i = 0; i < arrayList.size(); i++) {
+                if (i == position) {
+                    continue;
+                }
+                counterValue = arrayList.get(position);
+                counterValue = arrayList.get(i) - counterValue;
+                arrayList.set(i, counterValue);
             }
-            counterValue = arrayList.get(position);
-            counterValue = arrayList.get(i) - counterValue;
-            arrayList.set(i, counterValue);
+            arrayList.remove(position);
         }
-        arrayList.remove(position);
     }
 
     //remove by value
     void removeElementByValue(int value) {
-        for (int i = 0; i < arrayList.size(); i++) {
-            if (arrayList.get(i).equals(value)) {
-                count = i;
-                break;
-            }
-        }
-        if (count != -1) {
+        if (checkNull() == false) {
             for (int i = 0; i < arrayList.size(); i++) {
-                if (i == count) {
-                    continue;
+                if (arrayList.get(i).equals(value)) {
+                    count = i;
+                    break;
                 }
-                counterValue = arrayList.get(i) - value;
-                arrayList.set(i, counterValue);
             }
-            arrayList.remove(arrayList.get(count));
+            if (count != -1) {
+                for (int i = 0; i < arrayList.size(); i++) {
+                    if (i == count) {
+                        continue;
+                    }
+                    counterValue = arrayList.get(i) - value;
+                    arrayList.set(i, counterValue);
+                }
+                arrayList.remove(arrayList.get(count));
+            }
         }
     }
 
 
     //search element by position
-    int searchByPosition(int position) {
-        return arrayList.get(position);
+    boolean searchByPosition(int position) {
+        if ((checkNull() == false) && (position >= 0) && (position < arrayList.size())) {
+            return true;
+        }
+        else return false;
     }
 
     //search element by value
     boolean searchByValue(int value) {
-        return arrayList.contains(value);
+        if (checkNull() == false) {
+            return arrayList.contains(value);
+        } else
+            return false;
     }
 
     //search max element
     int searchMaxElement() {
-        maxElement = arrayList.get(0);
-        for (int i = 0; i < arrayList.size(); i++) {
-            if (maxElement < arrayList.get(i)) {
-                maxElement = arrayList.get(i);
+        if (checkNull() == false) {
+            maxElement = arrayList.get(0);
+            for (int i = 0; i < arrayList.size(); i++) {
+                if (maxElement < arrayList.get(i)) {
+                    maxElement = arrayList.get(i);
+                }
             }
-        }
-        return maxElement;
+            return maxElement;
+        } else
+            return maxElement;
     }
 
     //search min element
     int searchMinElement() {
-        minElement = arrayList.get(0);
-        for (int i = 0; i < arrayList.size(); i++) {
-            if (arrayList.get(i) < minElement) {
-                minElement = arrayList.get(i);
+        if (checkNull() == false) {
+            minElement = arrayList.get(0);
+            for (int i = 0; i < arrayList.size(); i++) {
+                if (arrayList.get(i) < minElement) {
+                    minElement = arrayList.get(i);
+                }
             }
-        }
-        return minElement;
+            return minElement;
+        } else
+            return minElement;
     }
 
     //search average arithmetic
     double arithmeticAverage() {
-        for (int i = 0; i < arrayList.size(); i++) {
-            arithmeticMean += arrayList.get(i);
-        }
-        arithmeticMean /= arrayList.size();
-        return arithmeticMean;
+        if (checkNull() == false) {
+            for (int i = 0; i < arrayList.size(); i++) {
+                arithmeticMean += arrayList.get(i);
+            }
+            arithmeticMean /= arrayList.size();
+            return arithmeticMean;
+        } else
+            return arithmeticMean;
     }
 }
