@@ -10,7 +10,6 @@ public class TopListLogic {
     int count;
     int maxElement;
     int minElement;
-    boolean flag;
     double arithmeticMean;
 
     TopListLogic() {
@@ -18,27 +17,19 @@ public class TopListLogic {
         counterValue = 0;
         count = -1;
         arithmeticMean = 0;
-        flag = false;
-        /*arrayList.add(1);
+        arrayList.add(1);
         arrayList.add(2);
         arrayList.add(3);
         arrayList.add(-10);
         arrayList.add(110);
-        arrayList.add(4);*/
+        arrayList.add(4);
         arrayList.add(1);
         arrayList.add(5);
     }
 
-    boolean checkNull() {
-        if (arrayList.equals(null)) {
-            return true;
-        } else
-            return false;
-    }
-
     //added by value
     void addByValue(int value) {
-        if (checkNull()) {
+        if (arrayList.size() == 0) {
             arrayList.add(value);
         } else {
             for (int i = 0; i < arrayList.size(); i++) {
@@ -52,14 +43,14 @@ public class TopListLogic {
     //added by position
     void addByPosition(int position, int value) {
         if (position >= 0 && position <= arrayList.size()) {
-            if (checkNull() == false) {
+            if (arrayList.size() > 0) {
                 for (int i = 0; i < arrayList.size(); i++) {
                     counterValue = arrayList.get(i) + value;
                     arrayList.set(i, counterValue);
                 }
                 arrayList.add(position, value);
             }
-            if (position == 0 && checkNull() == true) {
+            if (position == 0 && (arrayList.size() == 0)) {
                 arrayList.add(position, value);
             }
         }
@@ -67,7 +58,7 @@ public class TopListLogic {
 
     //remove by position
     void removeElementByPosition(int position) {
-        if ((checkNull() == false) && (position >= 0) && (position < arrayList.size())) {
+        if ((arrayList.size() > 0) && (position >= 0) && (position < arrayList.size())) {
             for (int i = 0; i < arrayList.size(); i++) {
                 if (i == position) {
                     continue;
@@ -82,7 +73,7 @@ public class TopListLogic {
 
     //remove by value
     void removeElementByValue(int value) {
-        if (checkNull() == false) {
+        if (arrayList.size() > 0) {
             for (int i = 0; i < arrayList.size(); i++) {
                 if (arrayList.get(i).equals(value)) {
                     count = i;
@@ -105,15 +96,14 @@ public class TopListLogic {
 
     //search element by position
     boolean searchByPosition(int position) {
-        if ((checkNull() == false) && (position >= 0) && (position < arrayList.size())) {
+        if ((arrayList.size() > 0) && (position >= 0) && (position < arrayList.size())) {
             return true;
-        }
-        else return false;
+        } else return false;
     }
 
     //search element by value
     boolean searchByValue(int value) {
-        if (checkNull() == false) {
+        if (arrayList.size() > 0) {
             return arrayList.contains(value);
         } else
             return false;
@@ -121,7 +111,7 @@ public class TopListLogic {
 
     //search max element
     int searchMaxElement() {
-        if (checkNull() == false) {
+        if (arrayList.size() > 0) {
             maxElement = arrayList.get(0);
             for (int i = 0; i < arrayList.size(); i++) {
                 if (maxElement < arrayList.get(i)) {
@@ -135,7 +125,7 @@ public class TopListLogic {
 
     //search min element
     int searchMinElement() {
-        if (checkNull() == false) {
+        if (arrayList.size() > 0) {
             minElement = arrayList.get(0);
             for (int i = 0; i < arrayList.size(); i++) {
                 if (arrayList.get(i) < minElement) {
@@ -149,7 +139,7 @@ public class TopListLogic {
 
     //search average arithmetic
     double arithmeticAverage() {
-        if (checkNull() == false) {
+        if (arrayList.size() > 0) {
             for (int i = 0; i < arrayList.size(); i++) {
                 arithmeticMean += arrayList.get(i);
             }
