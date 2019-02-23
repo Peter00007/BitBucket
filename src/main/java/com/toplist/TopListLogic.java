@@ -42,7 +42,10 @@ public class TopListLogic {
 
     //added by position
     void addByPosition(int position, int value) {
-        if (position >= 0 && position <= arrayList.size()) {
+        try {
+            if (position < 0 || position > arrayList.size()) {
+                throw new InvalidIndexException("Недопустиме значення індексу");
+            }
             if (arrayList.size() > 0) {
                 for (int i = 0; i < arrayList.size(); i++) {
                     counterValue = arrayList.get(i) + value;
@@ -53,12 +56,20 @@ public class TopListLogic {
             if (position == 0 && (arrayList.size() == 0)) {
                 arrayList.add(position, value);
             }
+        } catch (InvalidIndexException e) {
+            System.out.println("Exception = " + e + " " + position);
         }
     }
 
     //remove by position
     void removeElementByPosition(int position) {
-        if ((arrayList.size() > 0) && (position >= 0) && (position < arrayList.size())) {
+        try {
+            if (arrayList.size() == 0) {
+                throw new EmptyCollectionException("Видалення елемента із порожної колекції");
+            }
+            if (position < 0 || position > arrayList.size() - 1) {
+                throw new InvalidIndexException("Недопустиме значення індексу");
+            }
             for (int i = 0; i < arrayList.size(); i++) {
                 if (i == position) {
                     continue;
@@ -68,12 +79,19 @@ public class TopListLogic {
                 arrayList.set(i, counterValue);
             }
             arrayList.remove(position);
+        } catch (EmptyCollectionException e) {
+            System.out.println("Exception :" + e);
+        } catch (InvalidIndexException e) {
+            System.out.println("Exception :" + e + " " + position);
         }
     }
 
     //remove by value
     void removeElementByValue(int value) {
-        if (arrayList.size() > 0) {
+        try {
+            if (arrayList.size() == 0) {
+                throw new EmptyCollectionException("Видалення елемента із порожної колекції");
+            }
             for (int i = 0; i < arrayList.size(); i++) {
                 if (arrayList.get(i).equals(value)) {
                     count = i;
@@ -90,28 +108,49 @@ public class TopListLogic {
                 }
                 arrayList.remove(arrayList.get(count));
             }
+        } catch (EmptyCollectionException e) {
+            System.out.println("Exception :" + e);
         }
     }
 
 
     //search element by position
     boolean searchByPosition(int position) {
-        if ((arrayList.size() > 0) && (position >= 0) && (position < arrayList.size())) {
+        try {
+            if (arrayList.size() == 0) {
+                throw new EmptyCollectionException("Пошук елемента у порожній колекції");
+            }
+            if (position < 0 || position > arrayList.size() - 1) {
+                throw new InvalidIndexException("Недопустимий індекс");
+            }
             return true;
-        } else return false;
+        } catch (EmptyCollectionException e) {
+            System.out.println("Exception :" + e);
+        } catch (InvalidIndexException e) {
+            System.out.println("Exception :" + e + " " + position);
+        }
+        return false;
     }
 
     //search element by value
     boolean searchByValue(int value) {
-        if (arrayList.size() > 0) {
+        try {
+            if (arrayList.size() == 0) {
+                throw new EmptyCollectionException("Пошук елемента у порожній колекції");
+            }
             return arrayList.contains(value);
-        } else
-            return false;
+        } catch (EmptyCollectionException e) {
+            System.out.println("Exception :" + e);
+        }
+        return false;
     }
 
     //search max element
     int searchMaxElement() {
-        if (arrayList.size() > 0) {
+        try {
+            if (arrayList.size() == 0) {
+                throw new EmptyCollectionException("Пошук максимального елемента у порожній колекції");
+            }
             maxElement = arrayList.get(0);
             for (int i = 0; i < arrayList.size(); i++) {
                 if (maxElement < arrayList.get(i)) {
@@ -119,13 +158,18 @@ public class TopListLogic {
                 }
             }
             return maxElement;
-        } else
-            return maxElement;
+        } catch (EmptyCollectionException e) {
+            System.out.println("Exception :" + e);
+        }
+        return maxElement;
     }
 
     //search min element
     int searchMinElement() {
-        if (arrayList.size() > 0) {
+        try {
+            if (arrayList.size() == 0) {
+                throw new EmptyCollectionException("Пошук мінімального елемента у порожній колекції");
+            }
             minElement = arrayList.get(0);
             for (int i = 0; i < arrayList.size(); i++) {
                 if (arrayList.get(i) < minElement) {
@@ -133,19 +177,26 @@ public class TopListLogic {
                 }
             }
             return minElement;
-        } else
-            return minElement;
+        } catch (EmptyCollectionException e) {
+            System.out.println("Exception :" + e);
+        }
+        return minElement;
     }
 
     //search average arithmetic
     double arithmeticAverage() {
-        if (arrayList.size() > 0) {
+        try {
+            if (arrayList.size() == 0) {
+                throw new EmptyCollectionException("Пошук мінімального елемента у порожній колекції");
+            }
             for (int i = 0; i < arrayList.size(); i++) {
                 arithmeticMean += arrayList.get(i);
             }
             arithmeticMean /= arrayList.size();
             return arithmeticMean;
-        } else
-            return arithmeticMean;
+        } catch (EmptyCollectionException e) {
+            System.out.println("Exception :" + e);
+        }
+        return arithmeticMean;
     }
 }
