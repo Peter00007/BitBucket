@@ -57,7 +57,7 @@ public class TopListLogic {
                 arrayList.add(position, value);
             }
         } catch (InvalidIndexException e) {
-            System.out.println("Exception = " + e + " " + position);
+            e.printStackTrace();
         }
     }
 
@@ -80,9 +80,9 @@ public class TopListLogic {
             }
             arrayList.remove(position);
         } catch (EmptyCollectionException e) {
-            System.out.println("Exception :" + e);
+            e.printStackTrace();
         } catch (InvalidIndexException e) {
-            System.out.println("Exception :" + e + " " + position);
+            e.printStackTrace();
         }
     }
 
@@ -109,7 +109,7 @@ public class TopListLogic {
                 arrayList.remove(arrayList.get(count));
             }
         } catch (EmptyCollectionException e) {
-            System.out.println("Exception :" + e);
+            e.printStackTrace();
         }
     }
 
@@ -125,9 +125,9 @@ public class TopListLogic {
             }
             return true;
         } catch (EmptyCollectionException e) {
-            System.out.println("Exception :" + e);
+            e.printStackTrace();
         } catch (InvalidIndexException e) {
-            System.out.println("Exception :" + e + " " + position);
+            e.printStackTrace();
         }
         return false;
     }
@@ -140,7 +140,7 @@ public class TopListLogic {
             }
             return arrayList.contains(value);
         } catch (EmptyCollectionException e) {
-            System.out.println("Exception :" + e);
+            e.printStackTrace();
         }
         return false;
     }
@@ -159,7 +159,7 @@ public class TopListLogic {
             }
             return maxElement;
         } catch (EmptyCollectionException e) {
-            System.out.println("Exception :" + e);
+            e.printStackTrace();
         }
         return maxElement;
     }
@@ -178,7 +178,7 @@ public class TopListLogic {
             }
             return minElement;
         } catch (EmptyCollectionException e) {
-            System.out.println("Exception :" + e);
+            e.printStackTrace();
         }
         return minElement;
     }
@@ -195,7 +195,7 @@ public class TopListLogic {
             arithmeticMean /= arrayList.size();
             return arithmeticMean;
         } catch (EmptyCollectionException e) {
-            System.out.println("Exception :" + e);
+            e.printStackTrace();
         }
         return arithmeticMean;
     }
